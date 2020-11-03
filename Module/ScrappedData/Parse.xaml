@@ -4,7 +4,7 @@
     <x:Property Name="in_DT_Result" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_Date_ThisMonth" Type="InArgument(s:DateTime)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1209,912</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1208,959</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -27,6 +27,8 @@
       <x:String>System.Xml.Linq</x:String>
       <x:String>System.Net.Mail</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -59,72 +61,64 @@
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Parse Scrapped Data" sap:VirtualizedContainerService.HintSize="438,847" sap2010:WorkflowViewState.IdRef="Sequence_52">
+  <Sequence DisplayName="Parse Scrapped Data" sap:VirtualizedContainerService.HintSize="396,754" sap2010:WorkflowViewState.IdRef="Sequence_52">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[in_DT_Scrap]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="396,755" sap2010:WorkflowViewState.IdRef="ForEachRow_8">
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[in_DT_Scrap]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="354,662" sap2010:WorkflowViewState.IdRef="ForEachRow_8">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="346,606" sap2010:WorkflowViewState.IdRef="Sequence_51">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,514" sap2010:WorkflowViewState.IdRef="Sequence_51">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="Str_Name" />
               <Variable x:TypeArguments="s:String[]" Name="Ary_Parsed" />
               <Variable x:TypeArguments="x:Int32" Name="Int_Number" />
               <Variable x:TypeArguments="x:String" Name="Str_Number" />
-              <Variable x:TypeArguments="x:String" Name="Str_Today" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Sequence sap:VirtualizedContainerService.HintSize="304,514" sap2010:WorkflowViewState.IdRef="Sequence_50">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_20">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="s:String[]">[Ary_Parsed]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="s:String[]">[row.Item(0).ToString.Split(Environment.NewLine.ToCharArray)]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_21">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[Str_Name]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[Ary_Parsed(0).Trim]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_22">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:String">[Str_Number]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[Ary_Parsed(1).Replace("(", "").Replace(")", "").Replace(",", "")]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_23">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:Int32">[Int_Number]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:Int32">[cint(Str_Number)]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_Date_ThisMonth, Str_Name, Int_Number}]" DataTable="[in_DT_Result]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddDataRow_8" />
-            </Sequence>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+              <Assign.To>
+                <OutArgument x:TypeArguments="s:String[]">[Ary_Parsed]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="s:String[]">[row.Item(0).ToString.Split(Environment.NewLine.ToCharArray)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_21">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Str_Name]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Ary_Parsed(0).Trim]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_22">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Str_Number]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Ary_Parsed(1).Replace("(", "").Replace(")", "").Replace(",", "")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_23">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[Int_Number]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[cint(Str_Number)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{in_Date_ThisMonth, Str_Name, Int_Number}]" DataTable="[in_DT_Result]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddDataRow_8" />
           </Sequence>
         </ActivityAction>
       </ui:ForEachRow.Body>
